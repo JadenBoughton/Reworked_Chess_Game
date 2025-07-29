@@ -6,12 +6,13 @@
 #include <list>
 #include <iostream>
 #include <assert.h>
+using namespace std;
 
-#include "__interface__ IObserver.h"
+#include "IObserver.h"
 #include "Subject.h"
 #include "ChessBoard.h"
 
-class Observer : public __interface__ IObserver
+class Observer
 {
 private:
 	string message_from_subject;
@@ -25,7 +26,7 @@ private:
 	ChessBoard chessBoard;
 
 public:
-	virtual void Observer()=0;
+	virtual void Observer() {};
 
 	void update(string &message_from_subject);
 

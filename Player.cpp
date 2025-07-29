@@ -42,9 +42,9 @@ int Player::characterConversion(char letter)
     return 0; // Invalid character
 }
 
-string Player::getMove() {
+int* Player::getMove() {
     // This function should be overridden in derived classes
     // It is a placeholder here to satisfy the interface
-    return "";
+    return nullptr;
 }
 

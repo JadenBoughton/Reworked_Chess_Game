@@ -6,6 +6,7 @@
 #include <list>
 #include <iostream>
 #include <assert.h>
+using namespace std;
 
 class IObserver 
 {

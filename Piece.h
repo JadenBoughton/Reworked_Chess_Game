@@ -31,15 +31,13 @@ public:
 
 	virtual int* moveLogic(int* move, char gameBoardArray[][8], int row) const;
 
-	virtual void testKingCheck(bool gameBoardArray[][8], int x, int y) const;
+	virtual void testKingCheck(char gameBoardArray[][8], int x, int y) const;
 
-	virtual int* testIfInCheck(Piece *GameBoardArray[][8], char gameBoardArray[][8], int locationList[4]) const;
+	virtual bool testIfInCheck(Piece *GameBoardArray[][8], char gameBoardArray[][8], int locationList[4]) const;
 
 	char getSymbol();
 
 	char getDirection();
-
-	
 
 };
 #endif

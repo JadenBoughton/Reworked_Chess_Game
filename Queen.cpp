@@ -21,20 +21,20 @@ Queen::Queen(char direction, char symbol) : Piece(direction, symbol)
 
 int* Queen::moveLogic(int* move, char GameBoardArray[][8], int row)
 {
-    int across_from = *move;
+    int down_from1 = *move;
     move++;
-    int down_from = *move;
+    int across_from1 = *move;
     move++;
-    int across_to = *move;
+    int down_to1 = *move;
     move++;
-    int down_to = *move;
+    int across_to1 = *move;
 
-    int directionalDifferenceXAxis = across_from-across_to;
-    int directionalDifferenceYAxis = down_from-down_to;
+    int directionalDifferenceYAxis = down_from1-down_to1;
+    int directionalDifferenceXAxis = across_from1-across_to1;
 
-    if(directionalDifferenceXAxis == 0 || directionalDifferenceYAxis == 0){
+    if(directionalDifferenceYAxis == 0 || directionalDifferenceXAxis == 0){
         return rook->moveLogic(move, GameBoardArray, row);
-    }else if(directionalDifferenceXAxis == directionalDifferenceYAxis){
+    }else if(directionalDifferenceYAxis == directionalDifferenceXAxis){
         return bishop->moveLogic(move, GameBoardArray, row);
     }
 

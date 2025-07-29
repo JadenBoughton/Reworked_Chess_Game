@@ -27,14 +27,14 @@ Piece::Piece(char direction, char symbol)
 	assert(symbol != ' ');
 }
 
-int* Piece::testIfInCheck(Piece *(*GameBoardArray)[8], char (*gameBoardArray)[8], int *locationList) const
+bool Piece::testIfInCheck(Piece *(*GameBoardArray)[8], char (*gameBoardArray)[8], int *locationList) const
 {
 	// This function should be implemented in derived classes
 	// It is a placeholder here to satisfy the interface
-	return nullptr;
+	return false;
 }
 
-void Piece::testKingCheck(bool gameBoardArray[][8], int x, int y) const
+void Piece::testKingCheck(char (*gameBoardArray)[8], int x, int y) const
 {
 	// This function should be implemented in derived classes
 	// It is a placeholder here to satisfy the interface

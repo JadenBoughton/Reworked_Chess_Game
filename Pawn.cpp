@@ -26,90 +26,90 @@ bool Pawn::moveLogic(int* move, char GameBoardArray[][8], int row)
     }
 }
 
-void Pawn::testKingCheck(char GameBoardArray[][8], int x, int y)
+void Pawn::testKingCheck(char GameBoardArray[][8], int y, int x)
 {
 	if(direction == '+'){
-        if(GameBoardArray[x-1][y+1] == '_' && x > 0 && y < 8){
-            GameBoardArray[x-1][y+1] = 'x';
+        if(GameBoardArray[y-1][x+1] == '_' && y > 0 && x < 8){
+            GameBoardArray[y-1][x+1] = 'x';
         }
-        if(GameBoardArray[x+1][y+1] == '_' && x < 8 && y < 8){
-            GameBoardArray[x+1][y+1] = 'x';
+        if(GameBoardArray[y+1][x+1] == '_' && y < 8 && x < 8){
+            GameBoardArray[y+1][x+1] = 'x';
         }
     }else{
-        if(GameBoardArray[x-1][y-1] == '_' && x > 0 && y > 0){
-            GameBoardArray[x-1][y-1] = 'x';
+        if(GameBoardArray[y-1][x-1] == '_' && y > 0 && x > 0){
+            GameBoardArray[y-1][x-1] = 'x';
         }
-        if(GameBoardArray[x+1][y-1] == '_' && x < 8 && y > 0){
-            GameBoardArray[x+1][y-1] = 'x';
+        if(GameBoardArray[y+1][x-1] == '_' && y < 8 && x > 0){
+            GameBoardArray[y+1][x-1] = 'x';
         }
     }
 }
 
 int* Pawn::forward(int* numberArray, char GameBoardArray[][8], int row)
 {
-	int across_from = *numberArray;
+	int down_from = *numberArray;
     numberArray++;
-    int down_from = *numberArray;
-    numberArray++;
-    int across_to = *numberArray;
+    int across_from = *numberArray;
     numberArray++;
     int down_to = *numberArray;
+    numberArray++;
+    int across_to = *numberArray;
 
-    int directionalDifferenceXAxis = across_from-across_to;
     int directionalDifferenceYAxis = down_from-down_to;
+    int directionalDifferenceXAxis = across_from-across_to;
 
-    if(down_from > 7 || down_from < 0){
-        return nullptr;
-    }
-    else if(down_to > 7 || down_to < 0){
-        return nullptr;
-    }
-    else if(across_from > 7 || across_from < 0){
+    if(across_from > 7 || across_from < 0){
         return nullptr;
     }
     else if(across_to > 7 || across_to < 0){
         return nullptr;
     }
+    else if(down_from > 7 || down_from < 0){
+        return nullptr;
+    }
+    else if(down_to > 7 || down_to < 0){
+        return nullptr;
+    }
 
-    if(GameBoardArray[across_to][down_to] == 'b' || GameBoardArray[across_to][down_to] == 'B') {
-        if (directionalDifferenceYAxis == -1) {
-            if (across_from < 7 && directionalDifferenceXAxis == 1){
+    if(GameBoardArray[down_to][across_to] == 'b' || GameBoardArray[down_to][across_to] == 'B') {
+        if (directionalDifferenceXAxis == -1) {
+            if (down_from < 7 && directionalDifferenceYAxis == 1){
                 firstMove = false;
                 return numberArray;
             }
-            else if (across_from > 0 && directionalDifferenceXAxis == -1){
-                firstMove = false;
-                return numberArray;
-            }
-        }
-    }
-
-    if(across_from > 0 && GameBoardArray[across_from-1][down_from] == 'l'){
-        if(directionalDifferenceYAxis == -1){
-            if(directionalDifferenceXAxis == 1){
-                return numberArray;
-            }
-
-        }
-    }
-
-    if(across_from < 7 && GameBoardArray[across_from+1][down_from] == 'l'){
-        if(directionalDifferenceYAxis == -1) {
-            if (directionalDifferenceXAxis == -1) {
+            else if (down_from > 0 && directionalDifferenceYAxis == -1){
                 firstMove = false;
                 return numberArray;
             }
         }
     }
 
-    if(directionalDifferenceXAxis == 0 && directionalDifferenceYAxis == -1){
-        if(GameBoardArray[across_to][down_to] == '_'){
+    if(down_from > 0 && GameBoardArray[down_from-1][across_from] == 'l'){
+        if(directionalDifferenceXAxis == -1){
+            if(directionalDifferenceYAxis == 1){
+                return numberArray;
+            }
+
+        }
+    }
+
+    if(down_from < 7 && GameBoardArray[down_from+1][across_from] == 'l'){
+        if(directionalDifferenceXAxis == -1) {
+            if (directionalDifferenceYAxis == -1) {
+                firstMove = false;
+                return numberArray;
+            }
+        }
+    }
+
+    if(directionalDifferenceYAxis == 0 && directionalDifferenceXAxis == -1){
+        if(GameBoardArray[down_to][across_to] == '_'){
             firstMove = false;
             return numberArray;
         }
     }
 
-    if(directionalDifferenceYAxis == -2 && firstMove){
+    if(directionalDifferenceXAxis == -2 && firstMove){
         firstMove = false;
         return numberArray;
     }
@@ -119,68 +119,68 @@ int* Pawn::forward(int* numberArray, char GameBoardArray[][8], int row)
 
 int* Pawn::backward(int* numberArray, char GameBoardArray[][8], int row)
 {
-	int across_from = *numberArray;
+	int down_from1 = *numberArray;
     numberArray++;
-    int down_from = *numberArray;
+    int across_from1 = *numberArray;
     numberArray++;
-    int across_to = *numberArray;
+    int down_to1 = *numberArray;
     numberArray++;
-    int down_to = *numberArray;
+    int across_to1 = *numberArray;
 
-    int directionalDifferenceXAxis = across_from-across_to;
-    int directionalDifferenceYAxis = down_from-down_to;
+    int directionalDifferenceYAxis = down_from1-down_to1;
+    int directionalDifferenceXAxis = across_from1-across_to1;
 
-    if(down_from > 7 || down_from < 0){
+    if(across_from1 > 7 || across_from1 < 0){
         return nullptr;
     }
-    else if(down_to > 7 || down_to < 0){
+    else if(across_to1 > 7 || across_to1 < 0){
         return nullptr;
     }
-    else if(across_from > 7 || across_from < 0){
+    else if(down_from1 > 7 || down_from1 < 0){
         return nullptr;
     }
-    else if(across_to > 7 || across_to < 0){
+    else if(down_to1 > 7 || down_to1 < 0){
         return nullptr;
     }
 
-    if(GameBoardArray[across_to][down_to] == 'w' || GameBoardArray[across_to][down_to] == 'W') {
-        if (directionalDifferenceYAxis == 1) {
-            if (across_from < 7 && directionalDifferenceXAxis == 1){
+    if(GameBoardArray[down_to1][across_to1] == 'w' || GameBoardArray[down_to1][across_to1] == 'W') {
+        if (directionalDifferenceXAxis == 1) {
+            if (down_from1 < 7 && directionalDifferenceYAxis == 1){
                 firstMove = false;
                 return numberArray;
             }
-            else if (across_from > 0 && directionalDifferenceXAxis == -1){
+            else if (down_from1 > 0 && directionalDifferenceYAxis == -1){
                 firstMove = false;
                 return numberArray;
             }
         }
     }
 
-    if(across_from > 0 && GameBoardArray[across_from-1][down_from] == 'p'){
-        if(directionalDifferenceYAxis == 1){
-            if(directionalDifferenceXAxis == 1){
+    if(down_from1 > 0 && GameBoardArray[down_from1-1][across_from1] == 'p'){
+        if(directionalDifferenceXAxis == 1){
+            if(directionalDifferenceYAxis == 1){
                 return numberArray;
             }
 
         }
     }
 
-    if(across_from < 7 && GameBoardArray[across_from+1][down_from] == 'p'){
-        if(directionalDifferenceYAxis == 1) {
-            if (directionalDifferenceXAxis == -1) {
+    if(down_from1 < 7 && GameBoardArray[down_from1+1][across_from1] == 'p'){
+        if(directionalDifferenceXAxis == 1) {
+            if (directionalDifferenceYAxis == -1) {
                 return numberArray;
             }
         }
     }
 
-    if(directionalDifferenceXAxis == 0 && directionalDifferenceYAxis == 1){
-        if(GameBoardArray[across_to][down_to] == '_'){
+    if(directionalDifferenceYAxis == 0 && directionalDifferenceXAxis == 1){
+        if(GameBoardArray[down_to1][across_to1] == '_'){
             firstMove = false;
             return numberArray;
         }
     }
 
-    if(directionalDifferenceYAxis == 2 && firstMove){
+    if(directionalDifferenceXAxis == 2 && firstMove){
         firstMove = false;
         return numberArray;
     }

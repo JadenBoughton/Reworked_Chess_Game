@@ -37,7 +37,7 @@ vector<string> ChessBoard::getMoveHistory(int prevMoves)
     return vector<string>();
 }
 
-void ChessBoard::updateBoard(string move)
+void ChessBoard::updateBoard(int* move)
 {
 	//uses the move class to update the game board
 	//use Move class to convert the move into a format that can be used to update the game board

@@ -14,12 +14,12 @@
 class ChessGame
 {
 private:
-	ChessBoard chessBoard;
+	ChessBoard *chessBoard;
 	Move move;
-	Player player[2];
+	Player* player[2];
 
 public:
 	void main();
-
+	bool setup();
 };
 #endif

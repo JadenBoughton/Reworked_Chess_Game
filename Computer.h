@@ -12,7 +12,8 @@
 class Computer : public Player
 {
 public:
-	string generateMove();
+	Computer(char c) : Player(c) {}
+	int* getMove() override;
 
 };
 #endif

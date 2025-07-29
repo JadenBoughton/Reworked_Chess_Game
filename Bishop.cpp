@@ -19,44 +19,44 @@ Bishop::Bishop(char direction, char symbol) : Piece(direction, symbol)
 
 int* Bishop::moveLogic(int* move, char GameBoardArray[][8], int row)
 {
-    int across_from = *move;
-    move++;
     int down_from = *move;
     move++;
-    int across_to = *move;
+    int across_from = *move;
     move++;
     int down_to = *move;
+    move++;
+    int across_to = *move;
 
-    int directionalDifferenceXAxis = across_from-across_to;
     int directionalDifferenceYAxis = down_from-down_to;
+    int directionalDifferenceXAxis = across_from-across_to;
 
-    if(down_from > 7 || down_from < 0){
-        return nullptr;
-    }
-    else if(down_to > 7 || down_to < 0){
-        return nullptr;
-    }
-    else if(across_from > 7 || across_from < 0){
+    if(across_from > 7 || across_from < 0){
         return nullptr;
     }
     else if(across_to > 7 || across_to < 0){
         return nullptr;
     }
-
-    int absoluteX = abs(directionalDifferenceXAxis);
-    int absoluteY = abs(directionalDifferenceYAxis);
-
-    if(absoluteX != absoluteY || absoluteX == 0 || absoluteY == 0){
+    else if(down_from > 7 || down_from < 0){
+        return nullptr;
+    }
+    else if(down_to > 7 || down_to < 0){
         return nullptr;
     }
 
-    int distanceFromStartToFinish = absoluteX * absoluteY;
+    int absoluteY = abs(directionalDifferenceYAxis);
+    int absoluteX = abs(directionalDifferenceXAxis);
 
-    int directionX = absoluteX/directionalDifferenceXAxis;
+    if(absoluteY != absoluteX || absoluteY == 0 || absoluteX == 0){
+        return nullptr;
+    }
+
+    int distanceFromStartToFinish = absoluteY * absoluteX;
+
     int directionY = absoluteY/directionalDifferenceYAxis;
+    int directionX = absoluteX/directionalDifferenceXAxis;
 
     for(int i = 0; i < distanceFromStartToFinish; i++){
-        if(GameBoardArray[across_from-directionX][down_from-directionY] != '_'){
+        if(GameBoardArray[down_from-directionY][across_from-directionX] != '_'){
             return nullptr;
         }
     }
@@ -64,60 +64,60 @@ int* Bishop::moveLogic(int* move, char GameBoardArray[][8], int row)
     return move;
 }
 
-void Bishop::testKingCheck(char GameBoardArray[][8], int x, int y)
+void Bishop::testKingCheck(char GameBoardArray[][8], int y, int x)
 {
-	int xCopy = x;
-    int yCopy = y;
+	int yCopy = y;
+    int xCopy = x;
 
-    xCopy--;
-    yCopy++;
-    while(xCopy > 0 || yCopy < 8){
-        if(GameBoardArray[xCopy][yCopy] == '_' || GameBoardArray[xCopy][yCopy] == 'x') {
-            GameBoardArray[xCopy][yCopy] = 'x';
-            xCopy--;
-            yCopy++;
+    yCopy--;
+    xCopy++;
+    while(yCopy > 0 || xCopy < 8){
+        if(GameBoardArray[yCopy][xCopy] == '_' || GameBoardArray[yCopy][xCopy] == 'x') {
+            GameBoardArray[yCopy][xCopy] = 'x';
+            yCopy--;
+            xCopy++;
         }else{break;}
     }
 
-    xCopy = x;
     yCopy = y;
+    xCopy = x;
 
-    xCopy++;
     yCopy++;
-    while(xCopy < 8 || yCopy < 8){
-        if(GameBoardArray[xCopy][yCopy] == '_' || GameBoardArray[xCopy][yCopy] == 'x') {
-            GameBoardArray[xCopy][yCopy] = 'x';
-            xCopy++;
+    xCopy++;
+    while(yCopy < 8 || xCopy < 8){
+        if(GameBoardArray[yCopy][xCopy] == '_' || GameBoardArray[yCopy][xCopy] == 'x') {
+            GameBoardArray[yCopy][xCopy] = 'x';
             yCopy++;
+            xCopy++;
         }else{break;}
     }
 
     //if(GameBoardArray[xCopy][yCopy] == '_') {
     //}else{break;}
 
-    xCopy = x;
     yCopy = y;
+    xCopy = x;
 
-    xCopy++;
-    yCopy--;
-    while(xCopy < 8 || yCopy > 0){
-        if(GameBoardArray[xCopy][yCopy] == '_' || GameBoardArray[xCopy][yCopy] == 'x') {
-            GameBoardArray[xCopy][yCopy] = 'x';
-            xCopy++;
-            yCopy--;
+    yCopy++;
+    xCopy--;
+    while(yCopy < 8 || xCopy > 0){
+        if(GameBoardArray[yCopy][xCopy] == '_' || GameBoardArray[yCopy][xCopy] == 'x') {
+            GameBoardArray[yCopy][xCopy] = 'x';
+            yCopy++;
+            xCopy--;
         }else{break;}
     }
 
-    xCopy = x;
     yCopy = y;
+    xCopy = x;
 
-    xCopy--;
     yCopy--;
-    while(xCopy > 0 || yCopy > 0){
-        if(GameBoardArray[xCopy][yCopy] == '_' || GameBoardArray[xCopy][yCopy] == 'x') {
-            GameBoardArray[xCopy][yCopy] = 'x';
-            xCopy--;
+    xCopy--;
+    while(yCopy > 0 || xCopy > 0){
+        if(GameBoardArray[yCopy][xCopy] == '_' || GameBoardArray[yCopy][xCopy] == 'x') {
+            GameBoardArray[yCopy][xCopy] = 'x';
             yCopy--;
+            xCopy--;
         }else{break;}
     }
 }

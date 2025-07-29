@@ -19,7 +19,7 @@ public:
 	/**
 	 *  
 	 */
-	int* testIfInCheck(Piece *GameBoardArray[][8], char blackAndWhite[][8], int locationList[4]);
+	bool testIfInCheck(Piece *GameBoardArray[][8], char blackAndWhite[][8], int locationList[4]);
 
 };
 #endif

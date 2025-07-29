@@ -22,7 +22,7 @@ public:
 		assert(c == 'w' || c == 'b'); // Ensure color is valid
 	}
 	virtual ~Player() = default; // Virtual destructor for proper cleanup in derived classes
-	virtual string getMove() = 0; // Pure virtual function to get the player's move
+	virtual int* getMove() = 0; // Pure virtual function to get the player's move
 
 	static int* moveConverter(string move);
 
